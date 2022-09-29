@@ -42,11 +42,11 @@ export declare class Network extends EventEmitter<NetworkEvents> implements Star
     /**
      * Send a request and record RTT for latency measurements
      */
-    sendRequest(to: PeerId, msg: Message, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").DialingPeerEvent, void, unknown>;
+    sendRequest(to: PeerId, msg: Message, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").DialingPeerEvent | import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent, void, unknown>;
     /**
      * Sends a message without expecting an answer
      */
-    sendMessage(to: PeerId, msg: Message, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").DialingPeerEvent, void, unknown>;
+    sendMessage(to: PeerId, msg: Message, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").DialingPeerEvent | import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent, void, unknown>;
     /**
      * Write a message to the given stream
      */

@@ -97,17 +97,25 @@ export class Network extends EventEmitter<NetworkEvents> implements Startable, I
     let stream: Stream | undefined
 
     try {
+      const openConnectionStart = Date.now()
       const connection = await this.components.getConnectionManager().openConnection(to, options)
+      const createStreamStart = Date.now()
       const stream = await connection.newStream(this.protocol, options)
-
+      const sendMessageStart = Date.now()
       const response = await this._writeReadMessage(stream, msg.serialize(), options)
-
+      const sendMessageEnd = Date.now()
       yield peerResponseEvent({
         from: to,
         messageType: response.type,
         closer: response.closerPeers,
         providers: response.providerPeers,
-        record: response.record
+        record: response.record,
+        telemetry: {
+          openConnectionStart,
+          createStreamStart,
+          sendMessageStart,
+          sendMessageEnd
+        }
       })
     } catch (err: any) {
       yield queryErrorEvent({ from: to, error: err })
