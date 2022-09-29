@@ -60,9 +60,9 @@ export class Network extends EventEmitter {
         yield sendingQueryEvent({ to, type: msg.type });
         let stream;
         try {
-            const connectionStart = Date.now();
+            const openConnectionStart = Date.now();
             const connection = await this.components.getConnectionManager().openConnection(to, options);
-            const streamStart = Date.now();
+            const createStreamStart = Date.now();
             const stream = await connection.newStream(this.protocol, options);
             const sendMessageStart = Date.now();
             const response = await this._writeReadMessage(stream, msg.serialize(), options);
@@ -74,9 +74,10 @@ export class Network extends EventEmitter {
                 providers: response.providerPeers,
                 record: response.record,
                 telemetry: {
-                    openConnection: streamStart - connectionStart,
-                    createStream: sendMessageStart - streamStart,
-                    sendMessage: sendMessageEnd - sendMessageStart
+                    openConnectionStart,
+                    createStreamStart,
+                    sendMessageStart,
+                    sendMessageEnd
                 }
             });
         }
