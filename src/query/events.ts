@@ -26,6 +26,7 @@ export interface PeerResponseEventField {
   closer?: PeerInfo[]
   providers?: PeerInfo[]
   record?: Libp2pRecord
+  telemetry?: Object
 }
 
 export function peerResponseEvent (fields: PeerResponseEventField): PeerResponseEvent {
