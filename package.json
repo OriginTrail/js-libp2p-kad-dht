@@ -1,18 +1,18 @@
 {
-  "name": "@libp2p/kad-dht",
+  "name": "@tracelabs/kad-dht",
   "version": "3.0.6",
-  "description": "JavaScript implementation of the Kad-DHT for libp2p",
+  "description": "JavaScript implementation of the Kad-DHT for libp2p, forked from the official repository of libp2p at https://github.com/libp2p/js-libp2p-kad-dht",
   "license": "Apache-2.0 OR MIT",
-  "homepage": "https://github.com/libp2p/js-libp2p-kad-dht#readme",
+  "homepage": "https://github.com/OriginTrail/js-libp2p-kad-dht#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/libp2p/js-libp2p-kad-dht.git"
+    "url": "git+https://github.com/OriginTrail/js-libp2p-kad-dht.git"
   },
   "bugs": {
-    "url": "https://github.com/libp2p/js-libp2p-kad-dht/issues"
+    "url": "https://github.com/OriginTrail/js-libp2p-kad-dht/issues"
   },
   "keywords": [
-    "IPFS"
+    "libp2p", "kademlia","origintrail","dkg"
   ],
   "engines": {
     "node": ">=16.0.0",
