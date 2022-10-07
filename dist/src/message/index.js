@@ -1,6 +1,8 @@
 import { peerIdFromBytes } from '@libp2p/peer-id';
 import { multiaddr } from '@multiformats/multiaddr';
 import { Libp2pRecord } from '@libp2p/record';
+import { toString } from 'uint8arrays/to-string';
+import { fromString } from 'uint8arrays/from-string';
 import { Message as PBMessage } from './dht.js';
 export const MESSAGE_TYPE = PBMessage.MessageType;
 export const CONNECTION_TYPE = PBMessage.ConnectionType;
@@ -64,6 +66,7 @@ function toPbPeer(peer) {
     const output = {
         id: peer.id.toBytes(),
         addrs: (peer.multiaddrs ?? []).map((m) => m.bytes),
+        protocols: (peer.protocols ?? []).map((p) => fromString(p)),
         connection: CONNECTION_TYPE.CONNECTED
     };
     return output;
@@ -75,7 +78,7 @@ function fromPbPeer(peer) {
     return {
         id: peerIdFromBytes(peer.id),
         multiaddrs: (peer.addrs ?? []).map((a) => multiaddr(a)),
-        protocols: []
+        protocols: (peer.protocols ?? []).map((p) => toString(p))
     };
 }
 //# sourceMappingURL=index.js.map

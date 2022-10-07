@@ -137,8 +137,17 @@ export var Message;
                     else {
                         throw new Error('Protocol error: required field "addrs" was not found in object');
                     }
+                    if (obj.protocols != null) {
+                        for (const value of obj.protocols) {
+                            writer.uint32(24);
+                            writer.bytes(value);
+                        }
+                    }
+                    else {
+                        throw new Error('Protocol error: required field "protocols" was not found in object');
+                    }
                     if (obj.connection != null) {
-                        writer.uint32(24);
+                        writer.uint32(32);
                         Message.ConnectionType.codec().encode(obj.connection, writer);
                     }
                     if (opts.lengthDelimited !== false) {
@@ -146,7 +155,8 @@ export var Message;
                     }
                 }, (reader, length) => {
                     const obj = {
-                        addrs: []
+                        addrs: [],
+                        protocols: []
                     };
                     const end = length == null ? reader.len : reader.pos + length;
                     while (reader.pos < end) {
@@ -159,6 +169,9 @@ export var Message;
                                 obj.addrs.push(reader.bytes());
                                 break;
                             case 3:
+                                obj.protocols.push(reader.bytes());
+                                break;
+                            case 4:
                                 obj.connection = Message.ConnectionType.codec().decode(reader);
                                 break;
                             default:

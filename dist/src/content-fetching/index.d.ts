@@ -35,11 +35,11 @@ export declare class ContentFetching implements Initializable {
     /**
      * Send the best record found to any peers that have an out of date record
      */
-    sendCorrectionRecord(key: Uint8Array, vals: ValueEvent[], best: Uint8Array, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").DialingPeerEvent | import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent, void, unknown>;
+    sendCorrectionRecord(key: Uint8Array, vals: ValueEvent[], best: Uint8Array, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").DialingPeerEvent, void, unknown>;
     /**
      * Store the given key/value pair in the DHT
      */
-    put(key: Uint8Array, value: Uint8Array, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").DialingPeerEvent | import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | ValueEvent | import("@libp2p/interface-dht").ProviderEvent | import("@libp2p/interface-dht").AddingPeerEvent, void, undefined>;
+    put(key: Uint8Array, value: Uint8Array, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").ProviderEvent | ValueEvent | import("@libp2p/interface-dht").AddingPeerEvent | import("@libp2p/interface-dht").DialingPeerEvent, void, undefined>;
     /**
      * Get the value to the given key
      */

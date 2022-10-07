@@ -44,6 +44,7 @@ export declare namespace Message {
     interface Peer {
         id?: Uint8Array;
         addrs: Uint8Array[];
+        protocols: Uint8Array[];
         connection?: Message.ConnectionType;
     }
     namespace Peer {
