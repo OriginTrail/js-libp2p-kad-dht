@@ -30,11 +30,11 @@ export declare class PeerRouting implements Initializable {
     /**
      * Get a value via rpc call for the given parameters
      */
-    _getValueSingle(peer: PeerId, key: Uint8Array, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").DialingPeerEvent, void, unknown>;
+    _getValueSingle(peer: PeerId, key: Uint8Array, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").DialingPeerEvent | import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent, void, unknown>;
     /**
      * Get the public key directly from a node
      */
-    getPublicKeyFromNode(peer: PeerId, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").ValueEvent | import("@libp2p/interface-dht").DialingPeerEvent, void, unknown>;
+    getPublicKeyFromNode(peer: PeerId, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").DialingPeerEvent | import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").ValueEvent, void, unknown>;
     /**
      * Search for a peer with the given ID
      */
@@ -50,7 +50,7 @@ export declare class PeerRouting implements Initializable {
      *
      * Note: The peerStore is updated with new addresses found for the given peer.
      */
-    getValueOrPeers(peer: PeerId, key: Uint8Array, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").DialingPeerEvent, void, unknown>;
+    getValueOrPeers(peer: PeerId, key: Uint8Array, options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").DialingPeerEvent | import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent, void, unknown>;
     /**
      * Verify a record, fetching missing public keys from the network.
      * Throws an error if the record is invalid.

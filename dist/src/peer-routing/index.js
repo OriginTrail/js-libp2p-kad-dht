@@ -56,7 +56,7 @@ export class PeerRouting {
             return {
                 id: peerData.id,
                 multiaddrs: peerData.addresses.map((address) => address.multiaddr),
-                protocols: []
+                protocols: peerData.protocols
             };
         }
         return undefined;
@@ -118,7 +118,7 @@ export class PeerRouting {
                     peer: {
                         id: peer.id,
                         multiaddrs: peer.addresses.map((address) => address.multiaddr),
-                        protocols: []
+                        protocols: peer.protocols
                     }
                 });
                 return;
@@ -183,7 +183,7 @@ export class PeerRouting {
                 peer: {
                     id: peer,
                     multiaddrs: (await (this.components.getPeerStore().addressBook.get(peer)) ?? []).map(addr => addr.multiaddr),
-                    protocols: []
+                    protocols: await (this.components.getPeerStore().protoBook.get(peer)) ?? []
                 }
             });
         }
