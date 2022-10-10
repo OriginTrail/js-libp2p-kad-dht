@@ -1,6 +1,6 @@
 {
   "name": "@tracelabs/kad-dht",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "JavaScript implementation of the Kad-DHT for libp2p, forked from the official repository of libp2p at https://github.com/libp2p/js-libp2p-kad-dht",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/OriginTrail/js-libp2p-kad-dht#readme",
@@ -137,7 +137,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "@libp2p/components": "^2.0.4",
+    "@libp2p/components": "^3.0.0",
     "@libp2p/crypto": "^1.0.4",
     "@libp2p/interface-address-manager": "^1.0.3",
     "@libp2p/interface-connection": "^3.0.2",
@@ -184,7 +184,7 @@
     "varint": "^6.0.0"
   },
   "devDependencies": {
-    "@libp2p/interface-mocks": "^4.0.3",
+    "@libp2p/interface-mocks": "^6.0.0",
     "@libp2p/peer-id-factory": "^1.0.18",
     "@libp2p/peer-store": "^3.1.4",
     "@types/lodash.random": "^3.2.6",
@@ -201,6 +201,7 @@
     "lodash.random": "^3.2.0",
     "lodash.range": "^3.2.0",
     "p-retry": "^5.0.0",
+    "p-wait-for": "^5.0.0",
     "protons": "^5.1.0",
     "sinon": "^14.0.0",
     "ts-sinon": "^2.0.2",
