@@ -1,3 +1,22 @@
+## [4.0.0](https://github.com/libp2p/js-libp2p-kad-dht/compare/v3.1.0...v4.0.0) (2022-10-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* bump @libp2p/components from 2.1.1 to 3.0.0 (#379)
+
+### Dependencies
+
+* bump @libp2p/components from 2.1.1 to 3.0.0 ([#379](https://github.com/libp2p/js-libp2p-kad-dht/issues/379)) ([124be9c](https://github.com/libp2p/js-libp2p-kad-dht/commit/124be9c3be6d49a460d7fdb3e01217fcd7729e8d))
+* **dev:** bump @libp2p/interface-mocks from 4.0.3 to 6.0.0 ([#378](https://github.com/libp2p/js-libp2p-kad-dht/issues/378)) ([fc6741b](https://github.com/libp2p/js-libp2p-kad-dht/commit/fc6741b01edf5c54dfa8177aff20e035bd28f425))
+
+## [3.1.0](https://github.com/libp2p/js-libp2p-kad-dht/compare/v3.0.6...v3.1.0) (2022-10-04)
+
+
+### Features
+
+* tag kad-close peers ([#375](https://github.com/libp2p/js-libp2p-kad-dht/issues/375)) ([df15a83](https://github.com/libp2p/js-libp2p-kad-dht/commit/df15a832f9f274b3ebea9b7752e66a149828147c))
+
 ## [3.0.6](https://github.com/libp2p/js-libp2p-kad-dht/compare/v3.0.5...v3.0.6) (2022-09-29)
 
 
