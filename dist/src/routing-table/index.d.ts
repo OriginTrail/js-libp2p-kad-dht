@@ -2,6 +2,11 @@ import Queue from 'p-queue';
 import type { PeerId } from '@libp2p/interface-peer-id';
 import type { Startable } from '@libp2p/interfaces/startable';
 import { Components, Initializable } from '@libp2p/components';
+export declare const KAD_CLOSE_TAG_NAME = "kad-close";
+export declare const KAD_CLOSE_TAG_VALUE = 50;
+export declare const KBUCKET_SIZE = 20;
+export declare const PING_TIMEOUT = 10000;
+export declare const PING_CONCURRENCY = 10;
 export interface KBucketPeer {
     id: Uint8Array;
     peer: PeerId;
@@ -13,10 +18,15 @@ export interface KBucket {
     left: KBucket;
     right: KBucket;
 }
+interface KBucketTreeEvents {
+    'ping': (oldContacts: KBucketPeer[], newContact: KBucketPeer) => void;
+    'added': (contact: KBucketPeer) => void;
+    'removed': (contact: KBucketPeer) => void;
+}
 export interface KBucketTree {
     root: KBucket;
     localNodeId: Uint8Array;
-    on: (event: 'ping', callback: (oldContacts: KBucketPeer[], newContact: KBucketPeer) => void) => void;
+    on: <U extends keyof KBucketTreeEvents>(event: U, listener: KBucketTreeEvents[U]) => this;
     closest: (key: Uint8Array, count: number) => KBucketPeer[];
     closestPeer: (key: Uint8Array) => KBucketPeer;
     remove: (key: Uint8Array) => void;
@@ -31,6 +41,8 @@ export interface RoutingTableInit {
     kBucketSize?: number;
     pingTimeout?: number;
     pingConcurrency?: number;
+    tagName?: string;
+    tagValue?: number;
 }
 /**
  * A wrapper around `k-bucket`, to provide easy store and
@@ -47,11 +59,19 @@ export declare class RoutingTable implements Startable, Initializable {
     private readonly pingConcurrency;
     private running;
     private readonly protocol;
+    private readonly tagName;
+    private readonly tagValue;
     constructor(init: RoutingTableInit);
     init(components: Components): void;
     isStarted(): boolean;
     start(): Promise<void>;
     stop(): Promise<void>;
+    /**
+     * Keep track of our k-closest peers and tag them in the peer store as such
+     * - this will lower the chances that connections to them get closed when
+     * we reach connection limits
+     */
+    _tagPeers(kBuck: KBucketTree): void;
     /**
      * Called on the `ping` event from `k-bucket` when a bucket is full
      * and cannot split.
@@ -88,4 +108,5 @@ export declare class RoutingTable implements Startable, Initializable {
      */
     remove(peer: PeerId): Promise<void>;
 }
+export {};
 //# sourceMappingURL=index.d.ts.map

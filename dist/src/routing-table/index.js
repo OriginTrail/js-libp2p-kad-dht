@@ -5,6 +5,12 @@ import Queue from 'p-queue';
 import { TimeoutController } from 'timeout-abort-controller';
 import { logger } from '@libp2p/logger';
 import { Components } from '@libp2p/components';
+import { PeerSet } from '@libp2p/peer-collections';
+export const KAD_CLOSE_TAG_NAME = 'kad-close';
+export const KAD_CLOSE_TAG_VALUE = 50;
+export const KBUCKET_SIZE = 20;
+export const PING_TIMEOUT = 10000;
+export const PING_CONCURRENCY = 10;
 const METRIC_ROUTING_TABLE_SIZE = 'routing-table-size';
 const METRIC_PING_QUEUE_SIZE = 'ping-queue-size';
 const METRIC_PING_RUNNING = 'ping-running';
@@ -15,14 +21,16 @@ const METRIC_PING_RUNNING = 'ping-running';
 export class RoutingTable {
     constructor(init) {
         this.components = new Components();
-        const { kBucketSize, pingTimeout, lan, pingConcurrency, protocol } = init;
+        const { kBucketSize, pingTimeout, lan, pingConcurrency, protocol, tagName, tagValue } = init;
         this.log = logger(`libp2p:kad-dht:${lan ? 'lan' : 'wan'}:routing-table`);
-        this.kBucketSize = kBucketSize ?? 20;
-        this.pingTimeout = pingTimeout ?? 10000;
-        this.pingConcurrency = pingConcurrency ?? 10;
+        this.kBucketSize = kBucketSize ?? KBUCKET_SIZE;
+        this.pingTimeout = pingTimeout ?? PING_TIMEOUT;
+        this.pingConcurrency = pingConcurrency ?? PING_CONCURRENCY;
         this.lan = lan;
         this.running = false;
         this.protocol = protocol;
+        this.tagName = tagName ?? KAD_CLOSE_TAG_NAME;
+        this.tagValue = tagValue ?? KAD_CLOSE_TAG_VALUE;
         const updatePingQueueSizeMetric = () => {
             this.components.getMetrics()?.updateComponentMetric({
                 system: 'libp2p',
@@ -55,13 +63,50 @@ export class RoutingTable {
             numberOfNodesPerKBucket: this.kBucketSize,
             numberOfNodesToPing: 1
         });
-        kBuck.on('ping', this._onPing);
         this.kb = kBuck;
+        // test whether to evict peers
+        kBuck.on('ping', this._onPing);
+        // tag kad-close peers
+        this._tagPeers(kBuck);
     }
     async stop() {
         this.running = false;
         this.pingQueue.clear();
         this.kb = undefined;
+    }
+    /**
+     * Keep track of our k-closest peers and tag them in the peer store as such
+     * - this will lower the chances that connections to them get closed when
+     * we reach connection limits
+     */
+    _tagPeers(kBuck) {
+        let kClosest = new PeerSet();
+        const updatePeerTags = utils.debounce(() => {
+            const newClosest = new PeerSet(kBuck.closest(kBuck.localNodeId, KBUCKET_SIZE).map(contact => contact.peer));
+            const addedPeers = newClosest.difference(kClosest);
+            const removedPeers = kClosest.difference(newClosest);
+            Promise.resolve()
+                .then(async () => {
+                for (const peer of addedPeers) {
+                    await this.components.getPeerStore().tagPeer(peer, this.tagName, {
+                        value: this.tagValue
+                    });
+                }
+                for (const peer of removedPeers) {
+                    await this.components.getPeerStore().unTagPeer(peer, this.tagName);
+                }
+            })
+                .catch(err => {
+                this.log.error('Could not update peer tags', err);
+            });
+            kClosest = newClosest;
+        });
+        kBuck.on('added', () => {
+            updatePeerTags();
+        });
+        kBuck.on('removed', () => {
+            updatePeerTags();
+        });
     }
     /**
      * Called on the `ping` event from `k-bucket` when a bucket is full

@@ -90,4 +90,11 @@ export function createPutRecord(key, value) {
     const rec = new Libp2pRecord(key, value, timeReceived);
     return rec.serialize();
 }
+export function debounce(callback, wait = 100) {
+    let timeout;
+    return () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => callback(), wait);
+    };
+}
 //# sourceMappingURL=utils.js.map

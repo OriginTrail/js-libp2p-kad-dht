@@ -30,7 +30,7 @@ export declare class ContentRouting implements Initializable {
      * Announce to the network that we can provide the value for a given key and
      * are contactable on the given multiaddrs
      */
-    provide(key: CID, multiaddrs: Multiaddr[], options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").DialingPeerEvent | import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").ValueEvent | import("@libp2p/interface-dht").ProviderEvent | import("@libp2p/interface-dht").AddingPeerEvent, void, undefined>;
+    provide(key: CID, multiaddrs: Multiaddr[], options?: AbortOptions): AsyncGenerator<import("@libp2p/interface-dht").SendingQueryEvent | import("@libp2p/interface-dht").PeerResponseEvent | import("@libp2p/interface-dht").QueryErrorEvent | import("@libp2p/interface-dht").ProviderEvent | import("@libp2p/interface-dht").ValueEvent | import("@libp2p/interface-dht").AddingPeerEvent | import("@libp2p/interface-dht").DialingPeerEvent, void, undefined>;
     /**
      * Search the dht for up to `K` providers of the given CID.
      */

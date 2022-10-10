@@ -30,4 +30,5 @@ export declare function fromPublicKeyKey(key: Uint8Array): PeerId;
  * Create a new put record, encodes and signs it if enabled
  */
 export declare function createPutRecord(key: Uint8Array, value: Uint8Array): Uint8Array;
+export declare function debounce(callback: () => void, wait?: number): () => void;
 //# sourceMappingURL=utils.d.ts.map
