@@ -1,3 +1,35 @@
+## [5.0.1](https://github.com/libp2p/js-libp2p-kad-dht/compare/v5.0.0...v5.0.1) (2022-10-12)
+
+
+### Bug Fixes
+
+* update export ([#387](https://github.com/libp2p/js-libp2p-kad-dht/issues/387)) ([9dbbe55](https://github.com/libp2p/js-libp2p-kad-dht/commit/9dbbe55a6a525e78ed8ee8cc7b30636ff93cd18d))
+
+## [5.0.0](https://github.com/libp2p/js-libp2p-kad-dht/compare/v4.0.2...v5.0.0) (2022-10-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* modules no longer implement `Initializable` instead switching to constructor injection
+
+### Bug Fixes
+
+* remove @libp2p/components ([#386](https://github.com/libp2p/js-libp2p-kad-dht/issues/386)) ([abe5207](https://github.com/libp2p/js-libp2p-kad-dht/commit/abe52072b41d4188af59d61a78b02f38f1cc38a8)), closes [libp2p/js-libp2p-components#6](https://github.com/libp2p/js-libp2p-components/issues/6)
+
+## [4.0.2](https://github.com/libp2p/js-libp2p-kad-dht/compare/v4.0.1...v4.0.2) (2022-10-11)
+
+
+### Dependencies
+
+* **dev:** bump @libp2p/peer-store from 3.1.5 to 4.0.0 ([#382](https://github.com/libp2p/js-libp2p-kad-dht/issues/382)) ([94c0dc8](https://github.com/libp2p/js-libp2p-kad-dht/commit/94c0dc850f2b7f16eaa6e70d7157c3b2a3bbf7d5))
+
+## [4.0.1](https://github.com/libp2p/js-libp2p-kad-dht/compare/v4.0.0...v4.0.1) (2022-10-11)
+
+
+### Dependencies
+
+* bump @libp2p/interface-address-manager from 1.0.3 to 2.0.0 ([#383](https://github.com/libp2p/js-libp2p-kad-dht/issues/383)) ([5e7dfeb](https://github.com/libp2p/js-libp2p-kad-dht/commit/5e7dfeb0fa0479180d92e604052dbb5b16baf5f7))
+
 ## [4.0.0](https://github.com/libp2p/js-libp2p-kad-dht/compare/v3.1.0...v4.0.0) (2022-10-07)
 
 
